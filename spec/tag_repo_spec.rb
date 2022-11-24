@@ -1,4 +1,4 @@
-require 'post_repository'
+require 'tag_repository'
 
 def reset_tables
   seed_sql = File.read('spec/seeds.sql')
@@ -6,16 +6,16 @@ def reset_tables
   connection.exec(seed_sql)
 end
 
-describe PostRepository do
+describe TagRepository do
   before(:each) do 
     reset_tables
   end
 
   it 'returns all the posts associated with a tag' do 
-    repo = PostRepository.new 
-    posts = repo.find_by_tag('happy')
+    repo = TagRepository.new 
+    tags = repo.find_by_post('A new day')
 
-    expect(posts.length).to eq(2)
-    expect(posts.first.title).to eq('A new day')
+    expect(tags.length).to eq(2)
+    expect(tags.first.name).to eq('happy')
   end
 end
