@@ -1,6 +1,6 @@
 # Blog - many-to-many relationship
 
-Task:
+Task 1 (exercise):
 
 Setup a new project `blog` for this exercise.
 
@@ -24,3 +24,8 @@ posts = post_repository.find_by_tag('coding')
 | ----------- |----|-----------| ----------------------------------------------|----------|
 | `find_by_tag` |Find all posts for the given tag| A tag (string) | `SELECT ... JOIN ` | Array of `Post` |
 
+Task 2 (challenge):
+
+For this challenge, reuse the database schema created [in the previous section](./03_using_joins_with_many_to_many.md) (with the Many-to-Many between `posts` and `tags`).
+
+Test-drive and implement Model and Repository classes for the table `tags`, with the method `TagRepository#find_by_post`. This method should accept a post ID, and return an array of related  `Tag` objects.
