@@ -1,4 +1,4 @@
-# {{TABLE NAME}} Model and Repository Classes Design Recipe
+# Design Recipe for Blog, many-to-many exercise
 
 ## 1. Design and create the Table
 
