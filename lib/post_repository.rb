@@ -1,7 +1,7 @@
 require_relative './post'
 require_relative './tag'
 
-class TagRepository
+class PostRepository
   def find_by_tag(tag_name)
 
     sql = "SELECT posts.id AS post_id, posts.title, tags.id AS tag_id, tags.name AS tag_name 
@@ -13,19 +13,17 @@ class TagRepository
 
     result_set = DatabaseConnection.exec_params(sql, sql_params)
 
-    first_record = result_set[0]
-
-    tag = Tag.new 
-    tag.id = first_record['tag_id']
-    tag.name = first_record['tag_name']
-
+    posts = []
+    
     result_set.each do |record|
-      post = Post.new 
+      if record['tag_name'] = tag_name
+        post = Post.new 
 
-      post.id = record['post_id']
-      post.title = record['title']
-      tag.posts << post
+        post.id = record['post_id']
+        post.title = record['title']
+        posts << post
+      end
     end
-    return tag.posts
+    return posts
   end
 end

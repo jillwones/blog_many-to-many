@@ -35,10 +35,10 @@ psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
 Usually, the Model class name will be the capitalised table name (single instead of plural). The same name is then suffixed by `Repository` for the Repository class name.
 
 ```ruby
-class Tag
+class Post
 end
 
-class TagRepository
+class PostRepository
 end
 ```
 
@@ -47,10 +47,10 @@ end
 Define the attributes of your Model class. You can usually map the table columns to the attributes of the class, including primary and foreign keys.
 
 ```ruby
-class Tag
-  attr_accessor :id, :name, :posts 
+class Post
+  attr_accessor :id, :name, :tags 
   def initialize
-    @posts = []
+    @tags = []
   end
 end
 ```
@@ -64,7 +64,7 @@ Your Repository class will need to implement methods for each "read" or "write" 
 Using comments, define the method signatures (arguments and return value) and what they do - write up the SQL queries that will be used by each method.
 
 ```ruby
-class TagRepository
+class PostRepository
   def find_by_tag(tag_name) #takes tag name as arg
     # Executes the SQL query:
     # SELECT posts.id AS post_id, posts.title, tags.id AS tag_id, tags.name AS tag_name 
@@ -90,7 +90,7 @@ These examples will later be encoded as RSpec tests.
 # 1
 # finds all posts related to a tag
 
-repo = TagRepository.new 
+repo = PostRepository.new 
 posts = repo.find_by_tag('happy')
 
 expect(posts.length).to eq(2)
@@ -117,7 +117,7 @@ def reset_tables
   connection.exec(seed_sql)
 end
 
-describe TagRepository do
+describe PostRepository do
   before(:each) do 
     reset_tables
   end

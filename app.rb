@@ -1,10 +1,10 @@
 require_relative 'lib/database_connection'
-require_relative 'lib/tag_repository'
+require_relative 'lib/post_repository'
 
 # We need to give the database name to the method `connect`.
 DatabaseConnection.connect('many2many')
 
-repo = TagRepository.new 
+repo = PostRepository.new 
 
 posts = repo.find_by_tag('coding')
 
